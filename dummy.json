@@ -1,30 +1,10 @@
 {
-  "products": [
-    {
-      "name": "iphone15",
-      "price": 19000
-    },
-    {
-      "name": "macbook",
-      "price": 1234
-    }
-  ],
+  "products": [{ "name": "macbook", "price": 10000 }],
   "users": [
-    {
-      "name": "Orgil",
-      "age": 25
-    },
-    {
-      "name": "Khuslen",
-      "age": 18
-    },
-    {
-      "name": "Unubold",
-      "age": 24
-    },
-    {
-      "name": "Enkhee",
-      "age": 18
-    }
+    { "name": "Orgil", "age": 25 },
+    { "name": "Boldoo", "age": 15 },
+    { "name": "Temuulen", "age": 18 },
+    { "name": "Temuulen", "age": 18 },
+    { "name": "Temuulen", "age": 18 }
   ]
 }

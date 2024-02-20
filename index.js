@@ -6,7 +6,59 @@
 const express = require("express");
 const app = express();
 const { products, users } = require("./dummy.json");
+var bodyParser = require("body-parser");
+app.use(bodyParser.json());
+const fs = require("fs");
 
+app.post("/add-user", (req, res) => {
+  const newUser = req.body;
+  console.log(newUser);
+  // fs.writeFile("dummy.txt", JSON.stringify(newUser), function (err) {
+  //   if (err) throw err;
+  //   console.log("Saved!");
+  // });
+  // fs.rename("dummy.txt", "dummyRenamed.txt", function (err) {
+  //   if (err) throw err;
+  //   console.log("File Renamed!");
+  // });
+  // fs.unlink("dummyRenamed.txt", function (err) {
+  //   if (err) throw err;
+  //   console.log("File deleted!");
+  // });
+  fs.readFile("dummy.json", (error, data) => {
+    if (error) {
+      console.log("Error in reading file");
+    } else {
+      const jsonFile = JSON.parse(data.toString());
+      jsonFile.users.push(newUser);
+      fs.writeFile("dummy.json", JSON.stringify(jsonFile), (err) => {
+        if (err) {
+          console.log(err);
+          res.send("error happened");
+        } else {
+          console.log("success");
+          res.send("User added successfully");
+        }
+      });
+    }
+  });
+  res.status(200);
+  res.send("succesful add request");
+});
+
+app.get("/read-new-user", (req, res) => {
+  fs.readFile("dummy.txt", (error, data) => {
+    if (error) {
+      console.log("Error in reading file");
+    } else {
+      const jsonFile = JSON.parse(data.toString());
+      jsonFile.users.push(newUser);
+
+      res.status(200);
+      res.send(data);
+    }
+  });
+});
 app.get("/products", (req, res) => {
   res.type = "application/json";
   res.send({ products });
@@ -25,5 +77,5 @@ app.get("/usernames", (req, res) => {
   console.log(username);
 });
 app.listen(3001, () => {
-  console.log("server is listening");
+  console.log("server is listening at port 3001");
 });
